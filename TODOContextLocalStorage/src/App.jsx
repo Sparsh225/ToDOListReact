@@ -10,7 +10,18 @@ function App() {
   const addTodo=(todo)=>{
     setTodos((prev)=>[{id:Date.now ,...todo},...prev])
   }
+  
+  const updateTodo=(id,todo)=>{
+    setTodos((prev)=>(prev.map(prev)=(preTodo)=>(preTodo.id===id?todo:preTodo)))
+  }
 
+  const deleteTodo=(id)=>{
+    setTodos((prev)=>prev.filter((todo)=>todo.id!==id))
+  }
+
+  const toggleComplete=(id)=>{
+    
+  }
   return (
     <Todoprovider value={{todos,addTodo,deleteTodo,updateTodo,toggleComplete}}>
       <h1 className='text-3xl font-bold underline'>Hello world</h1>
