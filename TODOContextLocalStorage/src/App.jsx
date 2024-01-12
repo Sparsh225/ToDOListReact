@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -20,8 +20,20 @@ function App() {
   }
 
   const toggleComplete=(id)=>{
-    
+    setTodos((prev)=>prev.filter((todo)=>todo.id===id?{...todo ,completed:!todo.completed}:todo))
   }
+
+  useEffect(()=>{
+    JSON.parse(localStorage.getItem("todos"))
+    if(todos && todos.length>0){
+      setTodos(todos)
+    }
+  },[])
+
+  useEffect(()=>{
+    localStorage.setItem("todos",JSON.stringify(todos))
+  })
+
   return (
     <Todoprovider value={{todos,addTodo,deleteTodo,updateTodo,toggleComplete}}>
       <h1 className='text-3xl font-bold underline'>Hello world</h1>
